@@ -20,8 +20,9 @@
 <body>
 
   <div id="app">  
-    <div>Search Country Name: <input type="text" v-model="countryName"></div>
-    <table class="table table-condensed">
+    <div><b>Search Country Name:</b> <input type="text" v-model="countryName"></div>
+    <div v-if="filteredRows.length === 0" >No Data Display!!</div>
+    <table v-if="filteredRows.length > 0" class="table table-condensed">
       <thead>
         <tr>
           <th>國旗</th>
@@ -47,7 +48,6 @@
         <td>{{ r.callingCodes[0] }}</td>
       </tr>
     </table> 
-
     <div class="pagination">
       <ul>
         <li v-bind:class="{'disabled': (currPage === 1)}" 
@@ -55,7 +55,7 @@
         <li v-for="n in totalPage"
             v-bind:class="{'active': (currPage === (n))}" 
             @click.prevent="setPage(n)"><a href="#">{{n}}</a></li>
-        <li v-bind:class="{'disabled': (currPage === totalPage)}" 
+        <li v-bind:class="{'disabled': (currPage === totalPage || totalPage === 0)}" 
             @click.prevent="setPage(currPage+1)"><a href="#">Next</a></li>
       </ul>
     </div>
