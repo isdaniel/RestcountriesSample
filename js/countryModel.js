@@ -3,8 +3,7 @@ window.onload = function () {
   var app = new Vue({
     el: '#app',
     data: {
-      vm: {},
-      countryName: ''
+      vm: {}
     },
     created: function () {
       var self = this;
