@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-	<link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" type="text/css" />
-  <link href="  https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+  <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet"
+    type="text/css" />
+  <link href="  https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    type="text/css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js"></script>
   <script src="./js/country.js"></script>
   <style>
-    .click{
+    .click {
       cursor: pointer
-      }
-    .Reverse i{
+    }
+
+    .Reverse i {
       transform: rotate(180deg)
     }
   </style>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
 </head>
+
 <body>
 
-  <div id="app">  
+  <div id="app">
     <div><b>Search Country Name:</b> <input type="text" v-model="countryName"></div>
-    <div v-if="filteredRows.length === 0" >No Data Display!!</div>
+    <div v-if="filteredRows.length === 0">No Data Display!!</div>
     <table v-if="filteredRows.length > 0" class="table table-condensed">
       <thead>
         <tr>
@@ -36,29 +41,32 @@
           <th>母語名稱</th>
           <th>替代國家名稱</th>
           <th>國際電話區號</th>
-        </tr> 
+        </tr>
       </thead>
-      <tr v-for="(r, index) in filteredRows.slice(pageStart, pageStart + pageSize)">
-        <td><img v-bind:src=r.flag style='height:150px'></td>
-        <td>{{ r.name }}</td>
-        <td>{{ r.alpha2Code }}</td>
-        <td>{{ r.alpha3Code }}</td>
-        <td>{{ r.nativeName }}</td>
-        <td>{{ r.altSpellings[0] }}</td>
-        <td>{{ r.callingCodes[0] }}</td>
+      <tr v-for="item in filteredRows.slice(pageStart, pageStart + pageSize)">
+        <td><img v-bind:src=item.flag style='height:150px'></td>
+        <td>
+          <a target="_blank" :href="'./CountryModel.html?countryName=' + item.name">
+            {{ item.name }}
+          </a>
+        </td>
+        <td>{{ item.alpha2Code }}</td>
+        <td>{{ item.alpha3Code }}</td>
+        <td>{{ item.nativeName }}</td>
+        <td>{{ item.altSpellings[0] }}</td>
+        <td>{{ item.callingCodes[0] }}</td>
       </tr>
-    </table> 
+    </table>
     <div class="pagination">
       <ul>
-        <li v-bind:class="{'disabled': (currPage === 1)}" 
-            @click.prevent="setPage(currPage-1)"><a href="#">Prev</a></li>
-        <li v-for="n in totalPage"
-            v-bind:class="{'active': (currPage === (n))}" 
-            @click.prevent="setPage(n)"><a href="#">{{n}}</a></li>
-        <li v-bind:class="{'disabled': (currPage === totalPage || totalPage === 0)}" 
-            @click.prevent="setPage(currPage+1)"><a href="#">Next</a></li>
+        <li v-bind:class="{'disabled': (currPage === 1)}" @click.prevent="setPage(currPage-1)"><a href="#">Prev</a></li>
+        <li v-for="n in totalPage" v-bind:class="{'active': (currPage === (n))}" @click.prevent="setPage(n)"><a
+            href="#">{{n}}</a></li>
+        <li v-bind:class="{'disabled': (currPage === totalPage || totalPage === 0)}"
+          @click.prevent="setPage(currPage+1)"><a href="#">Next</a></li>
       </ul>
     </div>
   </div>
 </body>
+
 </html>
