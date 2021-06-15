@@ -7,7 +7,8 @@ window.onload = function () {
       pageSize: 25,
       currPage: 1,
       countryName: '',
-      ASC: 1
+      ASC: 1,
+      isLoading: true
     },
     computed: {
       filteredRows: function () {
@@ -47,6 +48,7 @@ window.onload = function () {
       var self = this;
       $.get('https://restcountries.eu/rest/v2/all', function (data) {
         self.rows = data;
+        self.isLoading = false;
       });
     }
   });

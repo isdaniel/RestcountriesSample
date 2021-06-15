@@ -7,8 +7,11 @@
     type="text/css" />
   <link href="  https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
     type="text/css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6/dist/vue.min.js"></script>
   <script src="./js/country.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3"></script>
+	<link href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css" rel="stylesheet">
+	<script src="./js/LoadingInit.js"></script>
   <style>
     .click {
       cursor: pointer
@@ -25,6 +28,11 @@
 <body>
 
   <div id="app">
+    <template>
+      <div class="vld-parent">
+        <loading :active.sync="isLoading" :is-full-page="true"></loading>
+      </div>
+    </template>
     <div><b>Search Country Name:</b> <input type="text" v-model="countryName"></div>
     <div v-if="filteredRows.length === 0">No Data Display!!</div>
     <table v-if="filteredRows.length > 0" class="table table-condensed">
