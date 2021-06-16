@@ -50,6 +50,11 @@ window.onload = function () {
         self.rows = data;
         self.isLoading = false;
       });
+    },
+    watch:{
+      countryName:function(newValue){
+        this.currPage = 1;
+      }
     }
   });
 }
